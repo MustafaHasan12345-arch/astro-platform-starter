@@ -1,21 +1,151 @@
----
-import Layout from '../layouts/Layout.astro';
-import ContextAlert from '../components/ContextAlert.astro';
-import Markdown from '../components/Markdown.astro';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Agha Hairdresser — Professional Cuts & Colour</title>
+  <meta name="description" content="Agha Hairdresser — expert cuts, colouring and styling in the heart of Baker Street. Book now!" />
 
-const explainer = `
-An Astro website can go way beyond static pages - on the right platform.
+  <style>
+    :root{
+      --accent:#d97fa6;
+      --bg:#fff;
+      --text:#222;
+      --muted:#666;
+      --radius:12px;
+      --maxw:1080px;
+    }
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color:var(--text);
+      background:var(--bg);
+    }
+    .site{max-width:var(--maxw);margin:0 auto;padding:20px;}
 
-Netlify supports not only [Streaming SSR](https://docs.astro.build/en/guides/server-side-rendering/#html-streaming) and fast [Edge Middleware](https://docs.astro.build/en/guides/middleware/), but also [on-demand revalidation](https://www.netlify.com/blog/cache-tags-and-purge-api-on-netlify/) and [stale-while-revalidate](https://www.netlify.com/blog/swr-and-fine-grained-cache-control/). 
-Any page or data can be rebuilt only when needed, without site visitors ever getting a performance hit.
-`;
----
+    header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--text);}
+    .brand img{height:56px;width:56px;object-fit:cover;border-radius:10px;}
+    .brand .title{font-size:20px;font-weight:700;}
+    .cta{display:flex;gap:8px;align-items:center;}
+    .btn{
+      background:var(--accent);
+      color:white;
+      padding:10px 14px;
+      border-radius:10px;
+      text-decoration:none;
+      font-weight:600;
+    }
+    .btn.ghost{
+      background:transparent;
+      color:var(--text);
+      border:1px solid #eee;
+    }
 
-<Layout title="Welcome to Astro.">
-    <ContextAlert class="mb-8" />
-    <h1 class="mb-10">Netlify Platform Starter for Astro</h1>
-    <Markdown content={explainer} class="mb-10 text-lg" />
-    <p>
-        <a href="https://docs.netlify.com/frameworks/astro/" class="btn btn-lg sm:min-w-64">Read the Docs</a>
-    </p>
-</Layout>
+    .hero{
+      background:linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('/hero.jpg') center/cover no-repeat;
+      border-radius:16px;
+      color:#fff;
+      padding:40px 30px;
+      text-align:center;
+      margin-bottom:30px;
+    }
+    .hero h1{margin:0 0 10px;font-size:30px;}
+    .hero p{margin:0 0 20px;color:#f3eaea;}
+
+    .card{
+      background:#fff;
+      border-radius:12px;
+      padding:16px;
+      box-shadow:0 6px 18px rgba(0,0,0,0.06);
+      margin-bottom:20px;
+    }
+    .services ul{list-style:none;padding:0;margin:0;}
+    .services li{padding:10px 0;border-bottom:1px dashed #eee;display:flex;justify-content:space-between;}
+    .services li:last-child{border-bottom:0;}
+    .price{color:var(--muted);font-weight:600;}
+
+    .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+    .gallery img{width:100%;height:120px;object-fit:cover;border-radius:8px;}
+
+    .contact .line{display:flex;gap:12px;align-items:center;margin-bottom:10px;}
+    .muted{color:var(--muted);font-size:14px;}
+    footer{margin-top:28px;text-align:center;color:var(--muted);font-size:13px;padding:18px 0;}
+  </style>
+</head>
+<body>
+  <div class="site">
+    <header>
+      <a class="brand" href="/">
+        <img src="/logo.png" alt="Agha Hairdresser logo" onerror="this.style.display='none'">
+        <div>
+          <div class="title">Agha Hairdresser</div>
+          <div class="muted">Cuts • Colour • Styling</div>
+        </div>
+      </a>
+      <div class="cta">
+        <a class="btn" href="tel:01234567890">Call: 01234 567890</a>
+        <a class="btn ghost" href="#booking">Book</a>
+      </div>
+    </header>
+
+    <section class="hero">
+      <h1>Beautiful Hair, Made for You</h1>
+      <p>Expert cuts, modern colour and personalised styling at 60 Baker Street.</p>
+      <a class="btn" href="#contact">Get Directions</a>
+    </section>
+
+    <section class="card services">
+      <h3>Our Services</h3>
+      <ul>
+        <li><span>Women’s Cut & Blow Dry</span><span class="price">£35</span></li>
+        <li><span>Men’s Cut</span><span class="price">£22</span></li>
+        <li><span>Full Highlights</span><span class="price">from £70</span></li>
+        <li><span>Balayage</span><span class="price">from £85</span></li>
+        <li><span>Colour Refresh</span><span class="price">from £40</span></li>
+      </ul>
+      <p class="muted" style="margin-top:12px;">Prices are a guide — exact price depends on hair length and service.</p>
+    </section>
+
+    <section class="card">
+      <h3>Gallery</h3>
+      <div class="gallery">
+        <img src="/photo1.jpg" alt="Style 1" onerror="this.style.display='none'">
+        <img src="/photo2.jpg" alt="Style 2" onerror="this.style.display='none'">
+        <img src="/photo3.jpg" alt="Style 3" onerror="this.style.display='none'">
+      </div>
+    </section>
+
+    <section id="booking" class="card contact">
+      <h3>Book an Appointment</h3>
+      <div class="line">
+        <div style="flex:1">
+          <strong>Phone</strong>
+          <div class="muted">01234 567890</div>
+        </div>
+        <div style="flex:1">
+          <strong>Email</strong>
+          <div class="muted"><a href="mailto:hello@aghahairdresser.co.uk">hello@aghahairdresser.co.uk</a></div>
+        </div>
+      </div>
+
+      <h4 style="margin-top:16px">Opening Hours</h4>
+      <div class="muted">Monday – Saturday: 10 AM – 7 PM  •  Sunday: Closed</div>
+
+      <h4 style="margin-top:12px">Visit Us</h4>
+      <div class="muted">60 Baker Street</div>
+
+      <p style="margin-top:10px;"><a class="btn" href="https://maps.google.com/?q=60+Baker+Street" target="_blank" rel="noopener">View on Google Maps</a></p>
+    </section>
+
+    <footer>
+      © <span id="year"></span> Agha Hairdresser • Made with care
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
